@@ -2,7 +2,7 @@ package ru.netology.graphics.server;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import ru.netology.graphics.image.TextGraphicsConverter;
+import ru.netology.graphics.image.TextGraphicsConverterInterface;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -17,9 +17,9 @@ public class GServer {
     public static final int PORT = 8888;
 
     private HttpServer server;
-    private TextGraphicsConverter converter;
+    private TextGraphicsConverterInterface converter;
 
-    public GServer(TextGraphicsConverter converter) throws Exception {
+    public GServer(TextGraphicsConverterInterface converter) throws Exception {
         if (converter == null) {
             throw new IllegalArgumentException("Серверу нужно передать в конструктор объект-конвертер, а было передано null.");
         }
@@ -28,7 +28,7 @@ public class GServer {
         this.converter.setMaxWidth(300);
         this.converter.setMaxRatio(4);
 
-        server = HttpServer.create(new InetSocketAddress("localhost", PORT), 0);
+        server = HttpServer.create(new InetSocketAddress("172.19.187.59",PORT), 0);
         server.createContext("/", this::serveHtml);
         server.createContext("/convert", this::serveConvertion);
     }
