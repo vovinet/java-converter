@@ -90,7 +90,7 @@ public class TextGraphicsConverter implements TextGraphicsConverterInterface {
             for (int horizontalPos = 0; horizontalPos < newWidth; horizontalPos++) {
               int color = bwRaster.getPixel(horizontalPos, verticalPos, pixelRGB)[0];
               char c = this.schema.convert(color);
-              textImage = textImage + c + c;
+              textImage = textImage + c + c + c;
             }
             textImage += "\n";
           }
